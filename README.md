@@ -1,54 +1,38 @@
-# React + TypeScript + Vite
+# Traffic Gesture Detection
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based web application front-end that detects traffic police gestures from uploaded videos. The project is built using **Vite** and served using **Nginx** in a Docker container.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- Upload video files of traffic police doing traffic coordinating gesture
+- Video preview before processing
+- Traffic gesture detection
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Installation & Running with Docker
 
-## Expanding the ESLint configuration
+### **1️⃣ Prerequisites**
+Before running the project, ensure you have the following installed on your computer:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Git](https://git-scm.com/downloads)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### **2️⃣ Clone the Repository**
+```sh
+git clone https://github.com/hungdungn47/traffic-gesture-detection
+cd traffic-gesture-detection
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### **3️⃣ Build & Run the Docker Container**
+Run the following command to build the image and start the container:
+```sh
+docker build -t traffic-gesture-detection .
+docker run -p 3000:80 traffic-gesture-detection
 ```
+
+### **4️⃣ Access the Application**
+Once the container is running, open your browser and visit:
+```
+http://localhost:3000
+```
+
+### 🎯 Contributions
+Feel free to fork this repository and submit pull requests to improve the project!
+
