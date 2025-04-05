@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Upload, Play, Send, AlertCircle } from 'lucide-react';
+import { slugToString } from './utils';
 
 interface DetectionResponse {
-  gesture: string;
-  confidence: number;
+  result: string;
+  // confidence: number;
 }
 
 function App() {
@@ -36,9 +37,9 @@ function App() {
 
     try {
       const formData = new FormData();
-      formData.append('video', selectedVideo);
+      formData.append('frame', selectedVideo);
 
-      const response = await fetch('YOUR_API_ENDPOINT', {
+      const response = await fetch('http://127.0.0.1:5000/predict', {
         method: 'POST',
         body: formData,
       });
@@ -48,6 +49,7 @@ function App() {
       }
 
       const data = await response.json();
+      console.log('Result: ', data);
       setDetection(data);
     } catch (err) {
       setError('Failed to process video. Please try again.');
@@ -153,16 +155,30 @@ function App() {
                       <div className="bg-white p-3 rounded-lg shadow-sm">
                         <p className="text-gray-600 mb-1 text-xs">Detected Gesture</p>
                         <p className="text-base font-semibold text-gray-800">
-                          {detection.gesture}
+                          {slugToString(detection.result)}
                         </p>
                       </div>
-                      <div className="bg-white p-3 rounded-lg shadow-sm">
+                      {/* <div className="bg-white p-3 rounded-lg shadow-sm">
                         <p className="text-gray-600 mb-1 text-xs">Confidence Score</p>
                         <p className="text-base font-semibold text-gray-800">
                           {(detection.confidence * 100).toFixed(2)}%
                         </p>
-                      </div>
+                      </div> */}
                     </div>
+                  </div>
+                )}
+                {detection && (
+                  <div className="h-full bg-white p-4 rounded-lg shadow-sm">
+                    <h2 className="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                      <Play className="w-5 h-5 mr-2 text-blue-500" />
+                      Video Preview
+                    </h2>
+                    <video
+                      // ref={videoRef}
+                      src={videoUrl}
+                      controls
+                      className="w-full rounded-lg shadow-sm max-h-[280px]"
+                    />
                   </div>
                 )}
               </div>
